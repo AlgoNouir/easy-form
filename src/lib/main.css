@@ -1,0 +1,24 @@
+.easy-form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    
+}
+
+.easy-form-inputs {
+    padding: 15px;
+    background-color: #EEE;
+    border: None;
+    border-radius: 10px;
+}
+
+.easy-form-section{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.easy-form-section {
+    size: 10px;
+}

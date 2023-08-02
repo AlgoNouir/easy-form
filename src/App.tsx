@@ -1,26 +1,20 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import EasyForm, { Easy } from "./lib";
 
-function App() {
+const structure: Easy = {
+  name: {
+    type: "string",
+    title: "نام و نام خانوادگی",
+    placeholder: "نام خود را وارد کنید",
+  },
+  age: {
+    type: "number",
+  },
+};
+
+export default function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div dir="rtl" style={{ width: "40%" }}>
+      <EasyForm structure={structure} />
     </div>
   );
 }
-
-export default App;
