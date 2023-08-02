@@ -23,6 +23,9 @@ export default function EasyInput({
       break;
     case "string":
       break;
+    case "email":
+      regExp = /\b[\w\.-]+@[\w\.-]+\.\w{2,4}\b/gi;
+      break;
     default:
       regExp = data.type;
       break;

@@ -8,8 +8,8 @@ const structure: Easy = {
     placeholder: "نام خود را وارد کنید",
     require: true,
   },
-  age: {
-    type: "number",
+  email: {
+    type: "email",
   },
 };
 

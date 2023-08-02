@@ -43,7 +43,7 @@ export default function EasyForm(props: {
 }
 
 export type EasyData = {
-  type: "string" | "number" | RegExp;
+  type: "string" | "number" | "email" | RegExp;
   title?: string;
   require?: boolean | string;
   placeholder?: string;
