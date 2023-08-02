@@ -1,14 +1,15 @@
-import { Dispatch, SetStateAction, useState } from "react";
+import { Dispatch, SetStateAction, useCallback, useState } from "react";
 import "./main.css";
 import EasyInput from "./components/input";
 
 export default function EasyForm(props: {
   structure: Easy;
   bottonText: string;
-  handler: Dispatch<SetStateAction<any>>;
+  onSubmit: (data: any) => void;
 }) {
   const [values, valuesHandler] = useState<any>();
   const [check, checkHandler] = useState(false);
+  const submit = useCallback(props.onSubmit, [props.structure]);
   return (
     <div className="easy-form">
       <div className="easy-form-inputs-section">
@@ -31,7 +32,7 @@ export default function EasyForm(props: {
         <button
           onClick={() => {
             checkHandler(true);
-            props.handler(values);
+            submit(values);
           }}
           className="easy-form-submit"
         >
