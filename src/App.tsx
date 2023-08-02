@@ -1,3 +1,4 @@
+import { useState } from "react";
 import EasyForm, { Easy } from "./lib";
 
 const structure: Easy = {
@@ -13,9 +14,16 @@ const structure: Easy = {
 };
 
 export default function App() {
+  const [data, dataHandler] = useState();
+  console.log(data);
+
   return (
     <div dir="rtl" style={{ width: "40%" }}>
-      <EasyForm structure={structure} bottonText="ذخیره" />
+      <EasyForm
+        structure={structure}
+        bottonText="ذخیره"
+        handler={dataHandler}
+      />
     </div>
   );
 }
