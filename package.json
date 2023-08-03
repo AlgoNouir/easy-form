@@ -2,7 +2,6 @@
   "name": "easy-form",
   "version": "1.0.0",
   "description": "Have you seen the similarities in the forms?Create forms with minimal code",
-  "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
