@@ -1,4 +1,4 @@
-le# minimal-form code less set fast
+# minimal-form code less set fast
 
 just insert your fields data in structure
 
@@ -12,7 +12,7 @@ export default function App() {
         name: { type: "string" },
         password: { type: "password" },
       }}
-      bottonText="ذخیره"
+      bottonText="submit"
       onSubmit={(d) => console.log(d)}
     />
   );
