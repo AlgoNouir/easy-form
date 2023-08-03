@@ -1,9 +1,9 @@
-le# Easy-form code less set fast
+le# minimal-form code less set fast
 
 just insert your fields data in structure
 
 ```typescript
-import EasyForm from "easy-form";
+import EasyForm from "minimal-form";
 
 export default function App() {
   return (

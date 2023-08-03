@@ -46,7 +46,7 @@ export default function EasyInput({
   }
 
   return (
-    <div key={`easy-form-${name}`} className="easy-form-section">
+    <div key={`minimal-form-${name}`} className="minimal-form-section">
       {data.title === undefined ? (
         <></>
       ) : (
@@ -55,11 +55,11 @@ export default function EasyInput({
             color: error ? "#900" : "",
           }}
           className={data.titleClassname || defaultTitleClassname}
-          htmlFor={`easy-form-${name}`}
+          htmlFor={`minimal-form-${name}`}
         >
           {data.title}
           {data.require ? (
-            <small className="easy-form-require">
+            <small className="minimal-form-require">
               {typeof data.require === "string" ? data.require : "*"}
             </small>
           ) : (
@@ -83,10 +83,10 @@ export default function EasyInput({
         }}
         disabled={data.disabled}
         className={
-          data.inputClassname || defaultInputClassname || "easy-form-inputs"
+          data.inputClassname || defaultInputClassname || "minimal-form-inputs"
         }
         placeholder={data.placeholder}
-        id={`easy-form-${name}`}
+        id={`minimal-form-${name}`}
       />
     </div>
   );

@@ -1,5 +1,5 @@
 {
-  "name": "easyform",
+  "name": "minimal-form",
   "version": "1.0.0",
   "description": "Have you seen the similarities in the forms?Create forms with minimal code",
   "dependencies": {

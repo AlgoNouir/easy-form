@@ -15,9 +15,11 @@ export default function EasyForm(props: {
   const [check, checkHandler] = useState(false);
   const submit = useCallback(props.onSubmit, [props.structure]);
   return (
-    <div className="easy-form">
+    <div className="minimal-form">
       <div
-        className={props.inputscontainerClassname || "easy-form-inputs-section"}
+        className={
+          props.inputscontainerClassname || "minimal-form-inputs-section"
+        }
       >
         {Object.entries(props.structure).map(([name, data]) => (
           <EasyInput
@@ -36,13 +38,13 @@ export default function EasyForm(props: {
           />
         ))}
       </div>
-      <div className="easy-form-submit-section">
+      <div className="minimal-form-submit-section">
         <button
           onClick={() => {
             checkHandler(true);
             submit(values);
           }}
-          className={props.submitClassname || "easy-form-submit"}
+          className={props.submitClassname || "minimal-form-submit"}
         >
           {props.bottonText}
         </button>
