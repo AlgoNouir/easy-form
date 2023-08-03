@@ -7,21 +7,35 @@ export default function EasyInput({
   defaultValue,
   error,
   handler,
+  defaultInputClassname,
+  defaultTitleClassname,
 }: {
   data: EasyData;
   name: string;
   defaultValue?: string;
   error: boolean;
   handler: (txt?: string) => void;
+  defaultInputClassname?: string;
+  defaultTitleClassname?: string;
 }) {
   const [txt, txtHandler] = useState(defaultValue);
 
   var regExp: RegExp = /^/g;
+  var inputName = name;
   switch (data.type) {
-    case "number":
-      regExp = /^\d+$/g;
+    case "time":
+    case "color":
+    case "password":
+    case "date":
       break;
     case "string":
+      inputName = "text";
+      break;
+    case "datetime":
+      inputName = "datetime-local";
+      break;
+    case "number":
+      regExp = /^\d+$/g;
       break;
     case "email":
       regExp = /\b[\w\.-]+@[\w\.-]+\.\w{2,4}\b/gi;
@@ -40,6 +54,7 @@ export default function EasyInput({
           style={{
             color: error ? "#900" : "",
           }}
+          className={data.titleClassname || defaultTitleClassname}
           htmlFor={`easy-form-${name}`}
         >
           {data.title}
@@ -56,6 +71,7 @@ export default function EasyInput({
         onBlur={() => {
           handler(txt);
         }}
+        type={inputName}
         onChange={(e) => {
           if (regExp.test(e.target.value)) txtHandler(e.target.value);
           else if (e.target.value === "") txtHandler(undefined);
@@ -66,7 +82,9 @@ export default function EasyInput({
           border: error ? "1px solid #900" : undefined,
         }}
         disabled={data.disabled}
-        className="easy-form-inputs"
+        className={
+          data.inputClassname || defaultInputClassname || "easy-form-inputs"
+        }
         placeholder={data.placeholder}
         id={`easy-form-${name}`}
       />

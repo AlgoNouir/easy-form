@@ -7,9 +7,14 @@ const structure: Easy = {
     placeholder: "نام خود را وارد کنید",
     require: true,
   },
-  email: {
-    type: "email",
+  password: {
+    type: "password",
+    placeholder: "رمز عبور خود را وارد کنید",
     require: true,
+  },
+  color: {
+    type: "time",
+    placeholder: "رنگ مورد علاقه خود را وارد کنید ",
   },
 };
 

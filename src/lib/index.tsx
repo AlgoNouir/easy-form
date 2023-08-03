@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useCallback, useState } from "react";
+import { useCallback, useState } from "react";
 import "./main.css";
 import EasyInput from "./components/input";
 
@@ -6,13 +6,19 @@ export default function EasyForm(props: {
   structure: Easy;
   bottonText: string;
   onSubmit: (data: any) => void;
+  inputscontainerClassname?: string;
+  inputDefaultClassname?: string;
+  titleDefaultClassname?: string;
+  submitClassname?: string;
 }) {
   const [values, valuesHandler] = useState<any>();
   const [check, checkHandler] = useState(false);
   const submit = useCallback(props.onSubmit, [props.structure]);
   return (
     <div className="easy-form">
-      <div className="easy-form-inputs-section">
+      <div
+        className={props.inputscontainerClassname || "easy-form-inputs-section"}
+      >
         {Object.entries(props.structure).map(([name, data]) => (
           <EasyInput
             handler={(txt) =>
@@ -25,6 +31,8 @@ export default function EasyForm(props: {
             }
             name={name}
             data={data}
+            defaultInputClassname={props.titleDefaultClassname}
+            defaultTitleClassname={props.submitClassname}
           />
         ))}
       </div>
@@ -34,7 +42,7 @@ export default function EasyForm(props: {
             checkHandler(true);
             submit(values);
           }}
-          className="easy-form-submit"
+          className={props.submitClassname || "easy-form-submit"}
         >
           {props.bottonText}
         </button>
@@ -44,12 +52,23 @@ export default function EasyForm(props: {
 }
 
 export type EasyData = {
-  type: "string" | "number" | "email" | RegExp;
+  type:
+    | "string"
+    | "number"
+    | "email"
+    | "password"
+    | "color"
+    | "date"
+    | "time"
+    | "datetime"
+    | RegExp;
   title?: string;
   require?: boolean | string;
   placeholder?: string;
   disabled?: boolean;
   default?: "string" | "number";
+  inputClassname?: string;
+  titleClassname?: string;
 };
 
 export type Easy = {
