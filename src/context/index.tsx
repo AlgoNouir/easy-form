@@ -2,9 +2,9 @@
 import React, { createContext, useContext } from "react";
 import { EasyFormComponents } from "../interfaces/components";
 
-type EasyFormContextType = {
+interface EasyFormContextType {
   components: EasyFormComponents;
-};
+}
 
 const EasyFormContext = createContext<EasyFormContextType | undefined>(
   undefined
