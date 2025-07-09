@@ -1,56 +1,56 @@
-export type MetaData = {
+export interface MetaData {
     label: string;
     placeholder: string;
     required: boolean;
     description?: string;
     defaultValue?: any;
-};
-export type StringInput = {
+}
+export interface StringInput extends MetaData {
     type: "string";
     maxLength?: number;
     minLength?: number;
     pattern?: string;
-} & MetaData;
-export type NumberInput = {
+}
+export interface NumberInput extends MetaData {
     type: "number";
     maxValue?: number;
     minValue?: number;
-} & MetaData;
-export type EmailInput = {
+}
+export interface EmailInput extends MetaData {
     type: "email";
     pattern?: string;
-} & MetaData;
-export type PasswordInput = {
+}
+export interface PasswordInput extends MetaData {
     type: "password";
     minLength?: number;
     pattern?: string;
-} & MetaData;
-export type ColorInput = {
+}
+export interface ColorInput extends MetaData {
     type: "color";
-} & MetaData;
-export type DateInput = {
+}
+export interface DateInput extends MetaData {
     type: "date";
     minDate?: Date;
     maxDate?: Date;
-} & MetaData;
-export type TimeInput = {
+}
+export interface TimeInput extends MetaData {
     type: "time";
     minTime?: Date;
     maxTime?: Date;
-} & MetaData;
-export type TextInput = {
+}
+export interface TextInput extends MetaData {
     type: "text";
     maxLength?: number;
     minLength?: number;
-} & MetaData;
-export type SelectInput = {
+}
+export interface SelectInput extends MetaData {
     type: "select";
     options: {
         label: string;
         value: string;
     }[];
-} & MetaData;
-export type MultiSelectInput = {
+}
+export interface MultiSelectInput extends MetaData {
     type: "multiSelect";
     options: {
         label: string;
@@ -58,49 +58,49 @@ export type MultiSelectInput = {
     }[];
     minLength?: number;
     maxLength?: number;
-} & MetaData;
-export type FileInput = {
+}
+export interface FileInput extends MetaData {
     type: "file";
     accept?: string[];
-} & MetaData;
-export type ImageInput = {
+}
+export interface ImageInput extends MetaData {
     type: "image";
     accept?: string[];
-} & MetaData;
-export type CheckboxInput = {
+}
+export interface CheckboxInput extends MetaData {
     type: "checkbox";
     options: {
         label: string;
         value: boolean;
     }[];
-} & MetaData;
-export type RadioInput = {
+}
+export interface RadioInput extends MetaData {
     type: "radio";
     options: {
         label: string;
         value: string;
     }[];
-} & MetaData;
-export type ListInputs = {
+}
+export interface ListInputs extends MetaData {
     type: "list";
     inputs: structure;
     minLength?: number;
     maxLength?: number;
-} & MetaData;
-export type RelationInput = {
+}
+export interface RelationInput extends MetaData {
     type: "relation";
     title: string;
     value: string;
     lazy?: boolean;
-} & MetaData;
-export type Many2ManyInput = {
+}
+export interface Many2ManyInput extends MetaData {
     type: "many2many";
     title: string;
     value: string;
     minLength?: number;
     maxLength?: number;
-} & MetaData;
-export type structure = {
+}
+export interface structure {
     [key: string]: InputTypes;
-};
+}
 export type InputTypes = StringInput | NumberInput | EmailInput | PasswordInput | ColorInput | DateInput | TimeInput | TextInput | SelectInput | MultiSelectInput | FileInput | ImageInput | CheckboxInput | RadioInput | ListInputs | RelationInput | Many2ManyInput;
