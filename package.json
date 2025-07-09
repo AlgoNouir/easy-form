@@ -10,7 +10,7 @@
   "files": [
     "dist",
     "index.ts",
-    "ReadMe.md"
+    "README.md"
   ],
   "exports": {
     ".": {
@@ -29,5 +29,12 @@
   "devDependencies": {
     "@types/react": "^19.1.8",
     "typescript": "^5.8.3"
-  }
+  },
+  "keywords": [
+    "form",
+    "react",
+    "dynamic form",
+    "react-hook-form",
+    "headless ui"
+  ]
 }
