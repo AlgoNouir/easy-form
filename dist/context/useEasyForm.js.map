@@ -1,0 +1,1 @@
+{"version":3,"file":"useEasyForm.js","sourceRoot":"","sources":["../../src/context/useEasyForm.ts"],"names":[],"mappings":";;;;;;AAAA,+BAAmC;AACnC,uCAAgC;AAEzB,IAAM,kBAAkB,GAAG;IAChC,IAAM,OAAO,GAAG,IAAA,kBAAU,EAAC,UAAe,CAAC,CAAC;IAC5C,IAAI,CAAC,OAAO,EAAE;QACZ,MAAM,IAAI,KAAK,CACb,4DAA4D,CAC7D,CAAC;KACH;IACD,OAAO,OAAO,CAAC;AACjB,CAAC,CAAC;AARW,QAAA,kBAAkB,sBAQ7B"}
