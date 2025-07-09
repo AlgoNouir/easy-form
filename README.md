@@ -20,9 +20,9 @@ Built with full support for headless usage and easy integration with any UI libr
 ## 📦 Installation
 
 ```bash
-npm install easyform-core
+npm install minimal-form
 # or
-yarn add easyform-core
+yarn add minimal-form
 ```
 
 You must also install `react`, `react-hook-form`, and your own UI components (e.g., shadcn/ui).
@@ -32,8 +32,8 @@ You must also install `react`, `react-hook-form`, and your own UI components (e.
 ## ⚡ Quick Start
 
 ```tsx
-import { EasyFormProvider } from "easyform-core";
-import { GovernanceForm } from "easyform-core"; // or your custom form renderer
+import { EasyFormProvider } from "minimal-form";
+import { GovernanceForm } from "minimal-form"; // or your custom form renderer
 import { structure } from "./form.structure";
 import { useForm } from "react-hook-form";
 import { Input } from "@/components/ui/input";
