@@ -15,12 +15,12 @@ exports.RenderField = void 0;
 var jsx_runtime_1 = require("react/jsx-runtime");
 var react_1 = require("react");
 var react_hook_form_1 = require("react-hook-form");
-var useEasyForm_1 = require("../context/useEasyForm");
+var index_1 = require("../context/index");
 function RenderField(_a) {
     var _b;
     var name = _a.name, field = _a.field, control = _a.control;
     var _c = (0, react_1.useState)(null), previewUrl = _c[0], setPreviewUrl = _c[1];
-    var components = (0, useEasyForm_1.useEasyFormContext)().components;
+    var components = (0, index_1.useEasyFormContext)().components;
     return ((0, jsx_runtime_1.jsxs)("div", __assign({ className: "space-y-2 rounded-lg max-w-full min-w-0 flex flex-col" }, { children: [field.label && ((0, jsx_runtime_1.jsxs)("div", __assign({ className: "flex items-center justify-between w-full" }, { children: [(0, jsx_runtime_1.jsx)("p", __assign({ className: "text-sm font-semibold text-gray-700" }, { children: field.label })), field.required && ((0, jsx_runtime_1.jsx)("span", __assign({ className: "text-xs text-red-500 font-medium" }, { children: "Required" })))] }))), (0, jsx_runtime_1.jsx)("div", __assign({ className: "flex" }, { children: (0, jsx_runtime_1.jsx)(react_hook_form_1.Controller, { name: name, control: control, defaultValue: (_b = field.defaultValue) !== null && _b !== void 0 ? _b : "", rules: {
                         required: field.required ? "This field is required" : false,
                     }, render: function (_a) {

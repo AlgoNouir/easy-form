@@ -1,11 +1,11 @@
 import React from "react";
-import { EasyFormComponents } from "../interfaces/components";
-type EasyFormContextType = {
+import type { EasyFormComponents } from "../interfaces/components";
+interface EasyFormContextType {
     components: EasyFormComponents;
-};
-declare const EasyFormContext: React.Context<EasyFormContextType | undefined>;
+}
 export declare const EasyFormProvider: ({ children, components, }: {
     children: React.ReactNode;
     components: EasyFormComponents;
 }) => import("react/jsx-runtime").JSX.Element;
-export default EasyFormContext;
+export declare const useEasyFormContext: () => EasyFormContextType;
+export {};

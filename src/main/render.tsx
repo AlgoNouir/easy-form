@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Controller } from "react-hook-form";
-import { useEasyFormContext } from "../context/useEasyForm";
+import { useEasyFormContext } from "../context/index";
 import type { InputTypes, structure } from "../interfaces";
 
 interface RenderFieldProps {

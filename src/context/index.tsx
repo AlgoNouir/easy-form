@@ -1,6 +1,6 @@
 // context/EasyFormContext.tsx
-import React, { createContext, useContext } from "react";
-import { EasyFormComponents } from "../interfaces/components";
+import React, { createContext } from "react";
+import type { EasyFormComponents } from "../interfaces/components";
 
 interface EasyFormContextType {
   components: EasyFormComponents;
@@ -24,4 +24,10 @@ export const EasyFormProvider = ({
   );
 };
 
-export default EasyFormContext;
+export const useEasyFormContext = () => {
+  const ctx = React.useContext(EasyFormContext);
+  if (!ctx) {
+    throw new Error("useEasyFormContext must be used within EasyFormProvider");
+  }
+  return ctx;
+};

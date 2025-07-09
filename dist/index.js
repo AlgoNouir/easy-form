@@ -25,14 +25,11 @@ var __importStar = (this && this.__importStar) || function (mod) {
 var __exportStar = (this && this.__exportStar) || function(m, exports) {
     for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.FormProvider = void 0;
 var _EasyForm = __importStar(require("./main/render"));
-var index_1 = __importDefault(require("./context/index"));
+var index_1 = require("./context/index");
 exports.default = _EasyForm.default;
-exports.FormProvider = index_1.default;
+exports.FormProvider = index_1.EasyFormProvider;
 __exportStar(require("./interfaces/index"), exports);
 //# sourceMappingURL=index.js.map
