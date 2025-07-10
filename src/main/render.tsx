@@ -28,7 +28,6 @@ export function RenderField({ name, field, control }: RenderFieldProps) {
         <Controller
           name={name}
           control={control}
-          defaultValue={field.defaultValue ?? ""}
           rules={{
             required: field.required ? "This field is required" : false,
           }}
