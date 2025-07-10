@@ -23,7 +23,6 @@ export function RenderField({ name, field, control }: RenderFieldProps) {
           )}
         </div>
       )}
-
       <div className="flex">
         <Controller
           name={name}
@@ -41,9 +40,8 @@ export function RenderField({ name, field, control }: RenderFieldProps) {
               return (
                 <Component
                   {...controllerField}
-                  field={field}
+                  {...field}
                   fieldState={error}
-                  controller={controllerField}
                   previewUrl={previewUrl}
                   setPreviewUrl={setPreviewUrl}
                   className={baseInputClasses}
@@ -90,7 +88,6 @@ export default function EasyForm({
           {description && <p className="text-gray-600">{description}</p>}
         </div>
       )}
-
       <div
         style={
           areaMap && {
