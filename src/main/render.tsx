@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { Controller } from "react-hook-form";
 import { useEasyFormContext } from "../context/index";
 import type { InputTypes, structure } from "../interfaces";
@@ -76,6 +76,25 @@ export default function EasyForm({
   title?: string;
   description?: string;
 }) {
+  const fields_in_area = useMemo(
+    () =>
+      Array(areaMap || []).reduce(
+        (result, list) => [...result, ...list.flatMap((l) => l)],
+        [] as string[]
+      ),
+    [areaMap]
+  );
+  const fields_not_in_area = useMemo(
+    () =>
+      Object.keys(structure).filter((field) => fields_in_area.includes(field)),
+    [fields_in_area, structure]
+  );
+
+  const fields_area = [
+    ...(areaMap || []),
+    ...fields_not_in_area.map((f) => Array(areaMap?.length || 1).fill(f)),
+  ];
+
   return (
     <div className="w-full mx-auto bg-white rounded-xl">
       {(title || description) && (
@@ -89,13 +108,11 @@ export default function EasyForm({
         </div>
       )}
       <div
-        style={
-          areaMap && {
-            gridTemplateAreas: areaMap
-              .map((area) => '"' + area.join(" ") + '"')
-              .join(" "),
-          }
-        }
+        style={{
+          gridTemplateAreas: fields_area
+            .map((area) => '"' + area.join(" ") + '"')
+            .join(" "),
+        }}
         className="grid gap-6 w-full max-w-full min-w-0"
       >
         {Object.entries(structure).map(([key, field]) => (

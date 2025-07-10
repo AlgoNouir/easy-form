@@ -10,6 +10,15 @@ var __assign = (this && this.__assign) || function () {
     };
     return __assign.apply(this, arguments);
 };
+var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
+    if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
+        if (ar || !(i in from)) {
+            if (!ar) ar = Array.prototype.slice.call(from, 0, i);
+            ar[i] = from[i];
+        }
+    }
+    return to.concat(ar || Array.prototype.slice.call(from));
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.RenderField = RenderField;
 exports.default = EasyForm;
@@ -36,8 +45,15 @@ function RenderField(_a) {
 }
 function EasyForm(_a) {
     var structure = _a.structure, control = _a.control, areaMap = _a.areaMap, title = _a.title, description = _a.description;
-    return ((0, jsx_runtime_1.jsxs)("div", { className: "w-full mx-auto bg-white rounded-xl", children: [(title || description) && ((0, jsx_runtime_1.jsxs)("div", { className: "mb-6 pb-6", children: [title && ((0, jsx_runtime_1.jsx)("h2", { className: "text-2xl font-semibold text-gray-800 mb-2", children: title })), description && (0, jsx_runtime_1.jsx)("p", { className: "text-gray-600", children: description })] })), (0, jsx_runtime_1.jsx)("div", { style: areaMap && {
-                    gridTemplateAreas: areaMap
+    var fields_in_area = (0, react_1.useMemo)(function () {
+        return Array(areaMap || []).reduce(function (result, list) { return __spreadArray(__spreadArray([], result, true), list.flatMap(function (l) { return l; }), true); }, []);
+    }, [areaMap]);
+    var fields_not_in_area = (0, react_1.useMemo)(function () {
+        return Object.keys(structure).filter(function (field) { return fields_in_area.includes(field); });
+    }, [fields_in_area, structure]);
+    var fields_area = __spreadArray(__spreadArray([], (areaMap || []), true), fields_not_in_area.map(function (f) { return Array((areaMap === null || areaMap === void 0 ? void 0 : areaMap.length) || 1).fill(f); }), true);
+    return ((0, jsx_runtime_1.jsxs)("div", { className: "w-full mx-auto bg-white rounded-xl", children: [(title || description) && ((0, jsx_runtime_1.jsxs)("div", { className: "mb-6 pb-6", children: [title && ((0, jsx_runtime_1.jsx)("h2", { className: "text-2xl font-semibold text-gray-800 mb-2", children: title })), description && (0, jsx_runtime_1.jsx)("p", { className: "text-gray-600", children: description })] })), (0, jsx_runtime_1.jsx)("div", { style: {
+                    gridTemplateAreas: fields_area
                         .map(function (area) { return '"' + area.join(" ") + '"'; })
                         .join(" "),
                 }, className: "grid gap-6 w-full max-w-full min-w-0", children: Object.entries(structure).map(function (_a) {
