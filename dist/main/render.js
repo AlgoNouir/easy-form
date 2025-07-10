@@ -1,4 +1,15 @@
 "use strict";
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.RenderField = RenderField;
 exports.default = EasyForm;
@@ -7,18 +18,17 @@ var react_1 = require("react");
 var react_hook_form_1 = require("react-hook-form");
 var index_1 = require("../context/index");
 function RenderField(_a) {
-    var _b;
     var name = _a.name, field = _a.field, control = _a.control;
-    var _c = (0, react_1.useState)(null), previewUrl = _c[0], setPreviewUrl = _c[1];
+    var _b = (0, react_1.useState)(null), previewUrl = _b[0], setPreviewUrl = _b[1];
     var components = (0, index_1.useEasyFormContext)().components;
-    return ((0, jsx_runtime_1.jsxs)("div", { className: "space-y-2 rounded-lg max-w-full min-w-0 flex flex-col", children: [field.label && ((0, jsx_runtime_1.jsxs)("div", { className: "flex items-center justify-between w-full", children: [(0, jsx_runtime_1.jsx)("p", { className: "text-sm font-semibold text-gray-700", children: field.label }), field.required && ((0, jsx_runtime_1.jsx)("span", { className: "text-xs text-red-500 font-medium", children: "Required" }))] })), (0, jsx_runtime_1.jsx)("div", { className: "flex", children: (0, jsx_runtime_1.jsx)(react_hook_form_1.Controller, { name: name, control: control, defaultValue: (_b = field.defaultValue) !== null && _b !== void 0 ? _b : "", rules: {
+    return ((0, jsx_runtime_1.jsxs)("div", { className: "space-y-2 rounded-lg max-w-full min-w-0 flex flex-col", children: [field.label && ((0, jsx_runtime_1.jsxs)("div", { className: "flex items-center justify-between w-full", children: [(0, jsx_runtime_1.jsx)("p", { className: "text-sm font-semibold text-gray-700", children: field.label }), field.required && ((0, jsx_runtime_1.jsx)("span", { className: "text-xs text-red-500 font-medium", children: "Required" }))] })), (0, jsx_runtime_1.jsx)("div", { className: "flex", children: (0, jsx_runtime_1.jsx)(react_hook_form_1.Controller, { name: name, control: control, rules: {
                         required: field.required ? "This field is required" : false,
                     }, render: function (_a) {
                         var controllerField = _a.field, error = _a.fieldState.error;
                         var baseInputClasses = "w-full focus:ring-2 focus:ring-blue-500/20 transition-all duration-200 max-w-full min-w-0";
                         var Component = components === null || components === void 0 ? void 0 : components[field.type];
                         if (Component) {
-                            return ((0, jsx_runtime_1.jsx)(Component, { field: field, fieldState: error, controller: controllerField, previewUrl: previewUrl, setPreviewUrl: setPreviewUrl, className: baseInputClasses }));
+                            return ((0, jsx_runtime_1.jsx)(Component, __assign({}, controllerField, field, { fieldState: error, previewUrl: previewUrl, setPreviewUrl: setPreviewUrl, className: baseInputClasses })));
                         }
                         // fallback when no component is provided
                         return ((0, jsx_runtime_1.jsxs)("div", { className: "p-2 bg-gray-50 rounded border border-gray-200 text-gray-500 text-sm", children: ["Field type not supported or missing component:", " ", (0, jsx_runtime_1.jsx)("strong", { children: field.type })] }));
