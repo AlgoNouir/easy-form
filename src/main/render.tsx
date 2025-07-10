@@ -41,7 +41,7 @@ export function RenderField({ name, field, control }: RenderFieldProps) {
             if (Component) {
               return (
                 <Component
-                  field={field}
+                  {...field}
                   fieldState={error}
                   controller={controllerField}
                   previewUrl={previewUrl}
