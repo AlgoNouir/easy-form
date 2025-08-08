@@ -9,16 +9,95 @@ interface RenderFieldProps {
   control: any;
 }
 
+function FallBack(props: { text: string; key: string }) {
+  // fallback when no component is provided
+  return (
+    <div className="p-2 bg-gray-50 rounded border border-gray-200 text-gray-500 text-sm">
+      {props.text} <strong>{props.key}</strong>
+    </div>
+  );
+}
+
 export function RenderField({ name, field, control }: RenderFieldProps) {
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
-  const { components } = useEasyFormContext();
+  const { components, relations } = useEasyFormContext();
+
+  // change field to _field name for relations and many2many fields
+  // if type of field is relation or many2many fields, convert to select and fetch thir choice
+  let _field = field;
+  // ----------------------------------------------------------------- RELATION
+
+  if (field.type === "relation") {
+    // get relations chocies from context main data. error if not exists
+    if (!relations)
+      return (
+        <FallBack
+          text="relation not have any function on provider. relation:"
+          key={field.relationName}
+        />
+      );
+
+    // create options from functions
+    const relationData = relations[field.relationName]();
+    const options = relationData.map((d) => ({
+      label: d[field.key],
+      value: d[field.value],
+    }));
+
+    // convert relation field to select
+    _field = {
+      ...field,
+      type: "select",
+      options: options,
+    };
+  }
+  // ----------------------------------------------------------------- MANY 2 MANY
+
+  if (field.type === "many2many") {
+    // get relations chocies from context main data. error if not exists
+    if (!relations)
+      return (
+        <FallBack
+          text="relation not have any function on provider. relation:"
+          key={field.relationName}
+        />
+      );
+
+    // create options from functions
+    const relationData = relations[field.relationName]();
+    const options = relationData.map((d) => ({
+      label: d[field.key],
+      value: d[field.value],
+    }));
+
+    // convert many2many field to multiSelect
+    _field = {
+      ...field,
+      type: "multiSelect",
+      options: options,
+    };
+  }
+
+  // ----------------------------------------------------------------- FALLBACK
+
+  // get component from context
+  const Component = components?.[_field.type];
+  if (!Component) {
+    return (
+      <FallBack
+        text="Field type not supported or missing component:"
+        key={_field.type}
+      />
+    );
+  }
+  // ----------------------------------------------------------------- RENDER
 
   return (
     <div className="space-y-2 rounded-lg max-w-full min-w-0 flex flex-col">
-      {field.label && (
+      {_field.label && (
         <div className="flex items-center justify-between w-full">
-          <p className="text-sm font-semibold text-gray-700">{field.label}</p>
-          {field.required && (
+          <p className="text-sm font-semibold text-gray-700">{_field.label}</p>
+          {_field.required && (
             <span className="text-xs text-red-500 font-medium">Required</span>
           )}
         </div>
@@ -28,35 +107,19 @@ export function RenderField({ name, field, control }: RenderFieldProps) {
           name={name}
           control={control}
           rules={{
-            required: field.required ? "This field is required" : false,
+            required: _field.required ? "This field is required" : false,
           }}
-          render={({ field: controllerField, fieldState: { error } }) => {
-            const baseInputClasses =
-              "w-full focus:ring-2 focus:ring-blue-500/20 transition-all duration-200 max-w-full min-w-0";
-
-            const Component = components?.[field.type];
-
-            if (Component) {
-              return (
-                <Component
-                  {...controllerField}
-                  {...field}
-                  fieldState={error}
-                  previewUrl={previewUrl}
-                  setPreviewUrl={setPreviewUrl}
-                  className={baseInputClasses}
-                />
-              );
-            }
-
-            // fallback when no component is provided
-            return (
-              <div className="p-2 bg-gray-50 rounded border border-gray-200 text-gray-500 text-sm">
-                Field type not supported or missing component:{" "}
-                <strong>{field.type}</strong>
-              </div>
-            );
-          }}
+          render={({ field: controllerField, fieldState: { error } }) => (
+            <Component
+              {...controllerField}
+              {..._field}
+              fieldState={error}
+              previewUrl={previewUrl}
+              setPreviewUrl={setPreviewUrl}
+              className="w-full focus:ring-2 focus:ring-blue-500/20 
+                  transition-all duration-200 max-w-full min-w-0"
+            />
+          )}
         />
       </div>
     </div>
