@@ -26,21 +26,57 @@ var jsx_runtime_1 = require("react/jsx-runtime");
 var react_1 = require("react");
 var react_hook_form_1 = require("react-hook-form");
 var index_1 = require("../context/index");
+function FallBack(props) {
+    // fallback when no component is provided
+    return ((0, jsx_runtime_1.jsxs)("div", { className: "p-2 bg-gray-50 rounded border border-gray-200 text-gray-500 text-sm", children: [props.text, " ", (0, jsx_runtime_1.jsx)("strong", { children: props.key })] }));
+}
 function RenderField(_a) {
     var name = _a.name, field = _a.field, control = _a.control;
     var _b = (0, react_1.useState)(null), previewUrl = _b[0], setPreviewUrl = _b[1];
-    var components = (0, index_1.useEasyFormContext)().components;
-    return ((0, jsx_runtime_1.jsxs)("div", { className: "space-y-2 rounded-lg max-w-full min-w-0 flex flex-col", children: [field.label && ((0, jsx_runtime_1.jsxs)("div", { className: "flex items-center justify-between w-full", children: [(0, jsx_runtime_1.jsx)("p", { className: "text-sm font-semibold text-gray-700", children: field.label }), field.required && ((0, jsx_runtime_1.jsx)("span", { className: "text-xs text-red-500 font-medium", children: "Required" }))] })), (0, jsx_runtime_1.jsx)("div", { className: "flex", children: (0, jsx_runtime_1.jsx)(react_hook_form_1.Controller, { name: name, control: control, rules: {
-                        required: field.required ? "This field is required" : false,
+    var _c = (0, index_1.useEasyFormContext)(), components = _c.components, relations = _c.relations;
+    // change field to _field name for relations and many2many fields
+    // if type of field is relation or many2many fields, convert to select and fetch thir choice
+    var _field = field;
+    // ----------------------------------------------------------------- RELATION
+    if (field.type === "relation") {
+        // get relations chocies from context main data. error if not exists
+        if (!relations)
+            return ((0, jsx_runtime_1.jsx)(FallBack, { text: "relation not have any function on provider. relation:" }, field.relationName));
+        // create options from functions
+        var relationData = relations[field.relationName]();
+        var options = relationData.map(function (d) { return ({
+            label: d[field.key],
+            value: d[field.value],
+        }); });
+        // convert relation field to select
+        _field = __assign(__assign({}, field), { type: "select", options: options });
+    }
+    // ----------------------------------------------------------------- MANY 2 MANY
+    if (field.type === "many2many") {
+        // get relations chocies from context main data. error if not exists
+        if (!relations)
+            return ((0, jsx_runtime_1.jsx)(FallBack, { text: "relation not have any function on provider. relation:" }, field.relationName));
+        // create options from functions
+        var relationData = relations[field.relationName]();
+        var options = relationData.map(function (d) { return ({
+            label: d[field.key],
+            value: d[field.value],
+        }); });
+        // convert many2many field to multiSelect
+        _field = __assign(__assign({}, field), { type: "multiSelect", options: options });
+    }
+    // ----------------------------------------------------------------- FALLBACK
+    // get component from context
+    var Component = components === null || components === void 0 ? void 0 : components[_field.type];
+    if (!Component) {
+        return ((0, jsx_runtime_1.jsx)(FallBack, { text: "Field type not supported or missing component:" }, _field.type));
+    }
+    // ----------------------------------------------------------------- RENDER
+    return ((0, jsx_runtime_1.jsxs)("div", { className: "space-y-2 rounded-lg max-w-full min-w-0 flex flex-col", children: [_field.label && ((0, jsx_runtime_1.jsxs)("div", { className: "flex items-center justify-between w-full", children: [(0, jsx_runtime_1.jsx)("p", { className: "text-sm font-semibold text-gray-700", children: _field.label }), _field.required && ((0, jsx_runtime_1.jsx)("span", { className: "text-xs text-red-500 font-medium", children: "Required" }))] })), (0, jsx_runtime_1.jsx)("div", { className: "flex", children: (0, jsx_runtime_1.jsx)(react_hook_form_1.Controller, { name: name, control: control, rules: {
+                        required: _field.required ? "This field is required" : false,
                     }, render: function (_a) {
                         var controllerField = _a.field, error = _a.fieldState.error;
-                        var baseInputClasses = "w-full focus:ring-2 focus:ring-blue-500/20 transition-all duration-200 max-w-full min-w-0";
-                        var Component = components === null || components === void 0 ? void 0 : components[field.type];
-                        if (Component) {
-                            return ((0, jsx_runtime_1.jsx)(Component, __assign({}, controllerField, field, { fieldState: error, previewUrl: previewUrl, setPreviewUrl: setPreviewUrl, className: baseInputClasses })));
-                        }
-                        // fallback when no component is provided
-                        return ((0, jsx_runtime_1.jsxs)("div", { className: "p-2 bg-gray-50 rounded border border-gray-200 text-gray-500 text-sm", children: ["Field type not supported or missing component:", " ", (0, jsx_runtime_1.jsx)("strong", { children: field.type })] }));
+                        return ((0, jsx_runtime_1.jsx)(Component, __assign({}, controllerField, _field, { fieldState: error, previewUrl: previewUrl, setPreviewUrl: setPreviewUrl, className: "w-full focus:ring-2 focus:ring-blue-500/20 \n                  transition-all duration-200 max-w-full min-w-0" })));
                     } }) })] }));
 }
 function EasyForm(_a) {
