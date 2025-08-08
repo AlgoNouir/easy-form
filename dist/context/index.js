@@ -32,6 +32,17 @@ var __importStar = (this && this.__importStar) || (function () {
         return result;
     };
 })();
+var __rest = (this && this.__rest) || function (s, e) {
+    var t = {};
+    for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
+        t[p] = s[p];
+    if (s != null && typeof Object.getOwnPropertySymbols === "function")
+        for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
+            if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i]))
+                t[p[i]] = s[p[i]];
+        }
+    return t;
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.useEasyFormContext = exports.EasyFormProvider = void 0;
 var jsx_runtime_1 = require("react/jsx-runtime");
@@ -39,8 +50,8 @@ var jsx_runtime_1 = require("react/jsx-runtime");
 var react_1 = __importStar(require("react"));
 var EasyFormContext = (0, react_1.createContext)(undefined);
 var EasyFormProvider = function (_a) {
-    var children = _a.children, components = _a.components;
-    return ((0, jsx_runtime_1.jsx)(EasyFormContext.Provider, { value: { components: components }, children: children }));
+    var children = _a.children, props = __rest(_a, ["children"]);
+    return ((0, jsx_runtime_1.jsx)(EasyFormContext.Provider, { value: props, children: children }));
 };
 exports.EasyFormProvider = EasyFormProvider;
 var useEasyFormContext = function () {

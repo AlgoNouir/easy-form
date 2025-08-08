@@ -1,17 +1,15 @@
 import React from "react";
 import type { EasyFormComponents } from "../interfaces/components";
-interface RelationSelectors {
-    [key: string]: () => {
-        [key: string]: any;
-    }[];
-}
-interface EasyFormContextType {
+type EasyFormContextType = {
     components: EasyFormComponents;
-    relations?: RelationSelectors;
-}
-export declare const EasyFormProvider: ({ children, components, }: {
+    relations?: {
+        [key: string]: () => {
+            [key: string]: any;
+        }[];
+    };
+};
+export declare const EasyFormProvider: ({ children, ...props }: {
     children: React.ReactNode;
-    components: EasyFormComponents;
-}) => import("react/jsx-runtime").JSX.Element;
+} & EasyFormContextType) => import("react/jsx-runtime").JSX.Element;
 export declare const useEasyFormContext: () => EasyFormContextType;
 export {};

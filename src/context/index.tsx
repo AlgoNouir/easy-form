@@ -2,14 +2,12 @@
 import React, { createContext } from "react";
 import type { EasyFormComponents } from "../interfaces/components";
 
-interface RelationSelectors {
-  [key: string]: () => { [key: string]: any }[];
-}
-
-interface EasyFormContextType {
+type EasyFormContextType = {
   components: EasyFormComponents;
-  relations?: RelationSelectors;
-}
+  relations?: {
+    [key: string]: () => { [key: string]: any }[];
+  };
+};
 
 const EasyFormContext = createContext<EasyFormContextType | undefined>(
   undefined
@@ -17,13 +15,12 @@ const EasyFormContext = createContext<EasyFormContextType | undefined>(
 
 export const EasyFormProvider = ({
   children,
-  components,
+  ...props
 }: {
   children: React.ReactNode;
-  components: EasyFormComponents;
-}) => {
+} & EasyFormContextType) => {
   return (
-    <EasyFormContext.Provider value={{ components }}>
+    <EasyFormContext.Provider value={props}>
       {children}
     </EasyFormContext.Provider>
   );

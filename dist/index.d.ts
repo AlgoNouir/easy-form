@@ -1,8 +1,14 @@
 import * as _EasyForm from "./main/render";
 declare const _default: typeof _EasyForm.default;
 export default _default;
-export declare const FormProvider: ({ children, components, }: {
+export declare const FormProvider: ({ children, ...props }: {
     children: React.ReactNode;
+} & {
     components: import("./interfaces/components").EasyFormComponents;
+    relations?: {
+        [key: string]: () => {
+            [key: string]: any;
+        }[];
+    };
 }) => import("react/jsx-runtime").JSX.Element;
 export * from "./interfaces/index";
