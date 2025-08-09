@@ -101,7 +101,11 @@ export interface Many2ManyInput extends MetaData {
     minLength?: number;
     maxLength?: number;
 }
+export interface FixedInput {
+    type: "fixed";
+    value: string | number;
+}
 export interface structure {
     [key: string]: InputTypes;
 }
-export type InputTypes = StringInput | NumberInput | EmailInput | PasswordInput | ColorInput | DateInput | TimeInput | TextInput | SelectInput | MultiSelectInput | FileInput | ImageInput | CheckboxInput | RadioInput | ListInputs | RelationInput | Many2ManyInput;
+export type InputTypes = StringInput | NumberInput | EmailInput | PasswordInput | ColorInput | DateInput | TimeInput | TextInput | SelectInput | MultiSelectInput | FileInput | ImageInput | CheckboxInput | RadioInput | ListInputs | RelationInput | Many2ManyInput | FixedInput;

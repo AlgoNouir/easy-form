@@ -107,6 +107,11 @@ export interface Many2ManyInput extends MetaData {
   maxLength?: number;
 }
 
+export interface FixedInput {
+  type: "fixed";
+  value: string | number;
+}
+
 export interface structure {
   [key: string]: InputTypes;
 }
@@ -128,4 +133,5 @@ export type InputTypes =
   | RadioInput
   | ListInputs
   | RelationInput
-  | Many2ManyInput;
+  | Many2ManyInput
+  | FixedInput;

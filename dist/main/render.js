@@ -37,6 +37,12 @@ function RenderField(_a) {
     // change field to _field name for relations and many2many fields
     // if type of field is relation or many2many fields, convert to select and fetch thir choice
     var _field = field;
+    if (_field.type === "fixed") {
+        return ((0, jsx_runtime_1.jsx)(react_hook_form_1.Controller, { name: name, control: control, render: function (_a) {
+                var controllerField = _a.field;
+                return ((0, jsx_runtime_1.jsx)("input", __assign({}, controllerField, { type: "hidden", value: _field.value })));
+            } }));
+    }
     // ----------------------------------------------------------------- RELATION
     if (field.type === "relation") {
         // get relations chocies from context main data. error if not exists

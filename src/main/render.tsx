@@ -1,7 +1,12 @@
 import { useMemo, useState } from "react";
 import { Controller } from "react-hook-form";
 import { useEasyFormContext } from "../context/index";
-import type { InputTypes, structure } from "../interfaces";
+import type {
+  FixedInput,
+  InputTypes,
+  SelectInput,
+  structure,
+} from "../interfaces";
 
 interface RenderFieldProps {
   name: string;
@@ -25,6 +30,23 @@ export function RenderField({ name, field, control }: RenderFieldProps) {
   // change field to _field name for relations and many2many fields
   // if type of field is relation or many2many fields, convert to select and fetch thir choice
   let _field = field;
+
+  if (_field.type === "fixed") {
+    return (
+      <Controller
+        name={name}
+        control={control}
+        render={({ field: controllerField }) => (
+          <input
+            {...controllerField}
+            type="hidden"
+            value={(_field as FixedInput).value}
+          />
+        )}
+      />
+    );
+  }
+
   // ----------------------------------------------------------------- RELATION
 
   if (field.type === "relation") {
@@ -49,7 +71,7 @@ export function RenderField({ name, field, control }: RenderFieldProps) {
       ...field,
       type: "select",
       options: options,
-    };
+    } as SelectInput;
   }
   // ----------------------------------------------------------------- MANY 2 MANY
 
@@ -90,6 +112,7 @@ export function RenderField({ name, field, control }: RenderFieldProps) {
       />
     );
   }
+
   // ----------------------------------------------------------------- RENDER
 
   return (
