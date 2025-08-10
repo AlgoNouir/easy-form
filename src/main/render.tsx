@@ -62,8 +62,8 @@ export function RenderField({ name, field, control }: RenderFieldProps) {
     // create options from functions
     const relationData = relations[field.relationName]();
     const options = relationData.map((d) => ({
-      label: d[field.key],
-      value: d[field.value],
+      label: d[field.item_label],
+      value: d[field.item_value],
     }));
 
     // convert relation field to select
@@ -88,8 +88,8 @@ export function RenderField({ name, field, control }: RenderFieldProps) {
     // create options from functions
     const relationData = relations[field.relationName]();
     const options = relationData.map((d) => ({
-      label: d[field.key],
-      value: d[field.value],
+      label: d[field.item_label],
+      value: d[field.item_value],
     }));
 
     // convert many2many field to multiSelect

@@ -42,8 +42,8 @@ function RenderField(_a) {
         // create options from functions
         var relationData = relations[field.relationName]();
         var options = relationData.map(function (d) { return ({
-            label: d[field.key],
-            value: d[field.value],
+            label: d[field.item_label],
+            value: d[field.item_value],
         }); });
         // convert relation field to select
         _field = __assign(__assign({}, field), { type: "select", options: options });
@@ -56,8 +56,8 @@ function RenderField(_a) {
         // create options from functions
         var relationData = relations[field.relationName]();
         var options = relationData.map(function (d) { return ({
-            label: d[field.key],
-            value: d[field.value],
+            label: d[field.item_label],
+            value: d[field.item_value],
         }); });
         // convert many2many field to multiSelect
         _field = __assign(__assign({}, field), { type: "multiSelect", options: options });

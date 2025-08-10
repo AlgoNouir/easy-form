@@ -93,15 +93,15 @@ export interface ListInputs extends MetaData {
 
 export interface RelationInput extends MetaData {
   type: "relation";
-  key: string;
-  value: string;
+  item_label: string;
+  item_value: string;
   relationName: string;
 }
 
 export interface Many2ManyInput extends MetaData {
   type: "many2many";
-  key: string;
-  value: string;
+  item_label: string;
+  item_value: string;
   relationName: string;
   minLength?: number;
   maxLength?: number;
