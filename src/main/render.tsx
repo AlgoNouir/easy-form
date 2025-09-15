@@ -33,7 +33,7 @@ export function RenderField({ name, field, control }: RenderFieldProps) {
   let _field = field;
 
   if (_field.type === "fixed") {
-    let _value = (_field as FixedInput).value;
+    let _value = (_field as FixedInput).fixed_value;
 
     let fixed_field_value =
       typeof _value === "function" ? _value(allValues) : _value;
@@ -54,7 +54,7 @@ export function RenderField({ name, field, control }: RenderFieldProps) {
       );
 
     _field = {
-      value: _value,
+      fixed_value: _value,
       type: "fixed",
       show: false,
     } as FixedInput;

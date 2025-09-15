@@ -109,7 +109,7 @@ export interface Many2ManyInput extends MetaData {
 
 export interface FixedInput extends MetaData {
   type: "fixed";
-  value: string | number | ((values: { [key in string]: any }) => any);
+  fixed_value: string | number | ((values: { [key in string]: any }) => any);
   show?: boolean;
 }
 
