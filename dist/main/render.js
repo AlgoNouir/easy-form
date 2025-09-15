@@ -38,9 +38,10 @@ function RenderField(_a) {
                     return ((0, jsx_runtime_1.jsx)("input", __assign({}, controllerField, { type: "hidden", value: fixed_field_value_1 })));
                 } }));
         _field = {
-            fixed_value: fixed_field_value_1,
+            fixed_value: _value,
             type: "fixed",
             show: false,
+            value: fixed_field_value_1,
         };
     }
     // ----------------------------------------------------------------- RELATION
