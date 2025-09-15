@@ -30,7 +30,7 @@ function RenderField(_a) {
     // if type of field is relation or many2many fields, convert to select and fetch thir choice
     var _field = field;
     if (_field.type === "fixed") {
-        var _value = _field.value;
+        var _value = _field.fixed_value;
         var fixed_field_value_1 = typeof _value === "function" ? _value(allValues) : _value;
         if (!_field.show)
             return ((0, jsx_runtime_1.jsx)(react_hook_form_1.Controller, { name: name, control: control, render: function (_a) {
@@ -38,7 +38,7 @@ function RenderField(_a) {
                     return ((0, jsx_runtime_1.jsx)("input", __assign({}, controllerField, { type: "hidden", value: fixed_field_value_1 })));
                 } }));
         _field = {
-            value: _value,
+            fixed_value: _value,
             type: "fixed",
             show: false,
         };
