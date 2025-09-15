@@ -1,5 +1,5 @@
-import { useMemo, useState } from "react";
-import { Controller } from "react-hook-form";
+import { useState } from "react";
+import { Controller, useWatch } from "react-hook-form";
 import { useEasyFormContext } from "../context/index";
 import type {
   FixedInput,
@@ -26,25 +26,38 @@ function FallBack(props: { text: string; key: string }) {
 export function RenderField({ name, field, control }: RenderFieldProps) {
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const { components, relations } = useEasyFormContext();
+  const allValues = useWatch({ control });
 
   // change field to _field name for relations and many2many fields
   // if type of field is relation or many2many fields, convert to select and fetch thir choice
   let _field = field;
 
   if (_field.type === "fixed") {
-    return (
-      <Controller
-        name={name}
-        control={control}
-        render={({ field: controllerField }) => (
-          <input
-            {...controllerField}
-            type="hidden"
-            value={(_field as FixedInput).value}
-          />
-        )}
-      />
-    );
+    let _value = (_field as FixedInput).value;
+
+    let fixed_field_value =
+      typeof _value === "function" ? _value(allValues) : _value;
+
+    if (!_field.show)
+      return (
+        <Controller
+          name={name}
+          control={control}
+          render={({ field: controllerField }) => (
+            <input
+              {...controllerField}
+              type="hidden"
+              value={fixed_field_value}
+            />
+          )}
+        />
+      );
+
+    _field = {
+      value: _value,
+      type: "fixed",
+      show: false,
+    } as FixedInput;
   }
 
   // ----------------------------------------------------------------- RELATION
@@ -117,10 +130,10 @@ export function RenderField({ name, field, control }: RenderFieldProps) {
 
   return (
     <div className="space-y-2 rounded-lg max-w-full min-w-0 flex flex-col">
-      {_field.label && (
+      {_field?.label && (
         <div className="flex items-center justify-between w-full">
           <p className="text-sm font-semibold text-gray-700">{_field.label}</p>
-          {_field.required && (
+          {_field?.required && (
             <span className="text-xs text-red-500 font-medium">Required</span>
           )}
         </div>
@@ -130,7 +143,7 @@ export function RenderField({ name, field, control }: RenderFieldProps) {
           name={name}
           control={control}
           rules={{
-            required: _field.required ? "This field is required" : false,
+            required: _field?.required ? "This field is required" : false,
           }}
           render={({ field: controllerField, fieldState: { error } }) => (
             <Component
