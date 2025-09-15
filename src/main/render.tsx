@@ -54,10 +54,11 @@ export function RenderField({ name, field, control }: RenderFieldProps) {
       );
 
     _field = {
-      fixed_value: fixed_field_value,
+      fixed_value: _value,
       type: "fixed",
       show: false,
-    } as FixedInput;
+      value: fixed_field_value,
+    } as any;
   }
 
   // ----------------------------------------------------------------- RELATION
