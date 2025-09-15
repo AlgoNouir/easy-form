@@ -1,6 +1,6 @@
 {
   "name": "minimal-form",
-  "version": "2.5.4",
+  "version": "2.5.5",
   "description": "Have you seen the similarities in the forms?Create forms with minimal code",
   "main": "dist/index.js",
   "scripts": {
