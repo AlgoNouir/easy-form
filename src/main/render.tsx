@@ -53,8 +53,11 @@ export function RenderField({ name, field, control }: RenderFieldProps) {
         />
       );
 
-    const Component: any = components?.[_field.type];
-    return <Component fixed_value={_field.fixed_value} value={_value} />;
+    _field = {
+      fixed_value: fixed_field_value,
+      type: "fixed",
+      show: false,
+    } as FixedInput;
   }
 
   // ----------------------------------------------------------------- RELATION
