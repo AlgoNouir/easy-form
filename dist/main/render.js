@@ -37,11 +37,8 @@ function RenderField(_a) {
                     var controllerField = _a.field;
                     return ((0, jsx_runtime_1.jsx)("input", __assign({}, controllerField, { type: "hidden", value: fixed_field_value_1 })));
                 } }));
-        _field = {
-            fixed_value: _value,
-            type: "fixed",
-            show: false,
-        };
+        var Component_1 = components === null || components === void 0 ? void 0 : components[_field.type];
+        return (0, jsx_runtime_1.jsx)(Component_1, { fixed_value: _field.fixed_value, value: _value });
     }
     // ----------------------------------------------------------------- RELATION
     if (field.type === "relation") {
