@@ -54,6 +54,7 @@ export function RenderField({ name, field, control }: RenderFieldProps) {
       );
 
     _field = {
+      ..._field,
       fixed_value: _value,
       type: "fixed",
       show: false,
