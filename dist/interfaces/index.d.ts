@@ -1,7 +1,7 @@
 export interface MetaData {
-    label: string;
-    placeholder: string;
-    required: boolean;
+    label?: string;
+    placeholder?: string;
+    required?: boolean;
     description?: string;
     defaultValue?: any;
 }
@@ -101,9 +101,12 @@ export interface Many2ManyInput extends MetaData {
     minLength?: number;
     maxLength?: number;
 }
-export interface FixedInput {
+export interface FixedInput extends MetaData {
     type: "fixed";
-    value: string | number;
+    value: string | number | ((values: {
+        [key in string]: any;
+    }) => any);
+    show?: boolean;
 }
 export interface structure {
     [key: string]: InputTypes;

@@ -25,14 +25,23 @@ function RenderField(_a) {
     var name = _a.name, field = _a.field, control = _a.control;
     var _b = (0, react_1.useState)(null), previewUrl = _b[0], setPreviewUrl = _b[1];
     var _c = (0, index_1.useEasyFormContext)(), components = _c.components, relations = _c.relations;
+    var allValues = (0, react_hook_form_1.useWatch)({ control: control });
     // change field to _field name for relations and many2many fields
     // if type of field is relation or many2many fields, convert to select and fetch thir choice
     var _field = field;
     if (_field.type === "fixed") {
-        return ((0, jsx_runtime_1.jsx)(react_hook_form_1.Controller, { name: name, control: control, render: function (_a) {
-                var controllerField = _a.field;
-                return ((0, jsx_runtime_1.jsx)("input", __assign({}, controllerField, { type: "hidden", value: _field.value })));
-            } }));
+        var _value = _field.value;
+        var fixed_field_value_1 = typeof _value === "function" ? _value(allValues) : _value;
+        if (!_field.show)
+            return ((0, jsx_runtime_1.jsx)(react_hook_form_1.Controller, { name: name, control: control, render: function (_a) {
+                    var controllerField = _a.field;
+                    return ((0, jsx_runtime_1.jsx)("input", __assign({}, controllerField, { type: "hidden", value: fixed_field_value_1 })));
+                } }));
+        _field = {
+            value: _value,
+            type: "fixed",
+            show: false,
+        };
     }
     // ----------------------------------------------------------------- RELATION
     if (field.type === "relation") {
@@ -69,8 +78,8 @@ function RenderField(_a) {
         return ((0, jsx_runtime_1.jsx)(FallBack, { text: "Field type not supported or missing component:" }, _field.type));
     }
     // ----------------------------------------------------------------- RENDER
-    return ((0, jsx_runtime_1.jsxs)("div", { className: "space-y-2 rounded-lg max-w-full min-w-0 flex flex-col", children: [_field.label && ((0, jsx_runtime_1.jsxs)("div", { className: "flex items-center justify-between w-full", children: [(0, jsx_runtime_1.jsx)("p", { className: "text-sm font-semibold text-gray-700", children: _field.label }), _field.required && ((0, jsx_runtime_1.jsx)("span", { className: "text-xs text-red-500 font-medium", children: "Required" }))] })), (0, jsx_runtime_1.jsx)("div", { className: "flex", children: (0, jsx_runtime_1.jsx)(react_hook_form_1.Controller, { name: name, control: control, rules: {
-                        required: _field.required ? "This field is required" : false,
+    return ((0, jsx_runtime_1.jsxs)("div", { className: "space-y-2 rounded-lg max-w-full min-w-0 flex flex-col", children: [(_field === null || _field === void 0 ? void 0 : _field.label) && ((0, jsx_runtime_1.jsxs)("div", { className: "flex items-center justify-between w-full", children: [(0, jsx_runtime_1.jsx)("p", { className: "text-sm font-semibold text-gray-700", children: _field.label }), (_field === null || _field === void 0 ? void 0 : _field.required) && ((0, jsx_runtime_1.jsx)("span", { className: "text-xs text-red-500 font-medium", children: "Required" }))] })), (0, jsx_runtime_1.jsx)("div", { className: "flex", children: (0, jsx_runtime_1.jsx)(react_hook_form_1.Controller, { name: name, control: control, rules: {
+                        required: (_field === null || _field === void 0 ? void 0 : _field.required) ? "This field is required" : false,
                     }, render: function (_a) {
                         var controllerField = _a.field, error = _a.fieldState.error;
                         return ((0, jsx_runtime_1.jsx)(Component, __assign({}, controllerField, _field, { fieldState: error, previewUrl: previewUrl, setPreviewUrl: setPreviewUrl, className: "w-full focus:ring-2 focus:ring-blue-500/20 \n                  transition-all duration-200 max-w-full min-w-0" })));
