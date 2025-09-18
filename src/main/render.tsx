@@ -1,5 +1,10 @@
 import { useState } from "react";
-import { Controller, useWatch } from "react-hook-form";
+import {
+  Controller,
+  useFormContext,
+  useFormState,
+  useWatch,
+} from "react-hook-form";
 import { useEasyFormContext } from "../context/index";
 import type {
   FixedInput,
@@ -27,7 +32,6 @@ export function RenderField({ name, field, control }: RenderFieldProps) {
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const { components, relations } = useEasyFormContext();
   const allValues = useWatch({ control });
-
   // change field to _field name for relations and many2many fields
   // if type of field is relation or many2many fields, convert to select and fetch thir choice
   let _field = field;
@@ -48,6 +52,7 @@ export function RenderField({ name, field, control }: RenderFieldProps) {
               {...controllerField}
               type="hidden"
               value={fixed_field_value}
+              onChange={() => controllerField.onChange(fixed_field_value)}
             />
           )}
         />
