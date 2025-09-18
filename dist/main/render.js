@@ -26,7 +26,6 @@ function RenderField(_a) {
     var _b = (0, react_1.useState)(null), previewUrl = _b[0], setPreviewUrl = _b[1];
     var _c = (0, index_1.useEasyFormContext)(), components = _c.components, relations = _c.relations;
     var allValues = (0, react_hook_form_1.useWatch)({ control: control });
-    var _d = { control: control };
     // change field to _field name for relations and many2many fields
     // if type of field is relation or many2many fields, convert to select and fetch thir choice
     var _field = field;
@@ -34,9 +33,8 @@ function RenderField(_a) {
         var _value = _field.fixed_value;
         var fixed_field_value_1 = typeof _value === "function" ? _value(allValues) : _value;
         if (!_field.show)
-            return ((0, jsx_runtime_1.jsx)(react_hook_form_1.Controller, { name: name, control: control, render: function (_a) {
+            return ((0, jsx_runtime_1.jsx)(react_hook_form_1.Controller, { name: name, control: control, defaultValue: fixed_field_value_1, render: function (_a) {
                     var controllerField = _a.field;
-                    controllerField.onChange(fixed_field_value_1);
                     return ((0, jsx_runtime_1.jsx)("input", __assign({}, controllerField, { type: "hidden", value: fixed_field_value_1, onChange: function () { return controllerField.onChange(fixed_field_value_1); } })));
                 } }));
         _field = __assign(__assign({}, _field), { fixed_value: _value, type: "fixed", show: false, value: fixed_field_value_1 });
