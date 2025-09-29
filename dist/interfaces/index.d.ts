@@ -15,6 +15,7 @@ export interface NumberInput extends MetaData {
     type: "number";
     maxValue?: number;
     minValue?: number;
+    maxDecimalDiget?: number;
 }
 export interface EmailInput extends MetaData {
     type: "email";
