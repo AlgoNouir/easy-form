@@ -70,8 +70,8 @@ function RenderField(_a) {
     // ----------------------------------------------------------------- SELECT
     if (_field.type === "select") {
         var _options = _field.options;
-        var fixed_field_options = typeof _options === "function" ? _options(allValues) : _options;
-        _field = __assign(__assign({}, _field), { options: _options, type: "fixed", show: false, value: fixed_field_options });
+        var select_field_options = typeof _options === "function" ? _options(allValues) : _options;
+        _field = __assign(__assign({}, _field), { options: select_field_options, type: "select" });
     }
     // ----------------------------------------------------------------- FALLBACK
     // get component from context
