@@ -67,6 +67,12 @@ function RenderField(_a) {
         // convert many2many field to multiSelect
         _field = __assign(__assign({}, field), { type: "multiSelect", options: options });
     }
+    // ----------------------------------------------------------------- SELECT
+    if (_field.type === "select") {
+        var _options = _field.options;
+        var fixed_field_options = typeof _options === "function" ? _options(allValues) : _options;
+        _field = __assign(__assign({}, _field), { options: _options, type: "fixed", show: false, value: fixed_field_options });
+    }
     // ----------------------------------------------------------------- FALLBACK
     // get component from context
     var Component = components === null || components === void 0 ? void 0 : components[_field.type];

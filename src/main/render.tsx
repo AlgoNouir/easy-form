@@ -121,6 +121,22 @@ export function RenderField({ name, field, control }: RenderFieldProps) {
     };
   }
 
+  // ----------------------------------------------------------------- SELECT
+
+  if (_field.type === "select") {
+    let _options = (_field as SelectInput).options;
+
+    let fixed_field_options =
+      typeof _options === "function" ? _options(allValues) : _options;
+
+    _field = {
+      ..._field,
+      options: _options,
+      type: "fixed",
+      show: false,
+      value: fixed_field_options,
+    } as any;
+  }
   // ----------------------------------------------------------------- FALLBACK
 
   // get component from context

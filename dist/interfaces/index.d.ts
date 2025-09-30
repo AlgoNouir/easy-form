@@ -49,7 +49,12 @@ export interface SelectInput extends MetaData {
     options: {
         label: string;
         value: string;
-    }[];
+    }[] | ((values: {
+        [key in string]: any;
+    }) => {
+        label: string;
+        value: string;
+    }[]);
 }
 export interface MultiSelectInput extends MetaData {
     type: "multiSelect";

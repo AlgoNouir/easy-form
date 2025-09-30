@@ -55,7 +55,12 @@ export interface TextInput extends MetaData {
 
 export interface SelectInput extends MetaData {
   type: "select";
-  options: { label: string; value: string }[];
+  options:
+    | { label: string; value: string }[]
+    | ((values: { [key in string]: any }) => {
+        label: string;
+        value: string;
+      }[]);
 }
 
 export interface MultiSelectInput extends MetaData {
