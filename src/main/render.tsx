@@ -156,7 +156,7 @@ export function RenderField({ name, field, control }: RenderFieldProps) {
         <div className="flex items-center justify-between w-full">
           <p className="text-sm font-semibold text-gray-700">{_field.label}</p>
           {_field?.required && (
-            <span className="text-xs text-red-500 font-medium">Required</span>
+            <span className="text-xs text-red-500 font-medium">*</span>
           )}
         </div>
       )}
