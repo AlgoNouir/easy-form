@@ -1,13 +1,4 @@
-import { keys } from "ts-transformer-keys";
 import { structure, InputTypes } from "../interfaces";
-
-export function generate<T extends object>(): structure {
-  const typeKeys = keys<T>();
-
-  return typeKeys.reduce((result, key) => {
-    return result;
-  }, {} as structure);
-}
 
 // Convert a JSON/Standard-like schema into EasyForm `structure`
 // Supported mappings (best-effort):

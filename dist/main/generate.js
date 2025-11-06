@@ -1,14 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.generate = generate;
 exports.convertFromSchema = convertFromSchema;
-var ts_transformer_keys_1 = require("ts-transformer-keys");
-function generate() {
-    var typeKeys = (0, ts_transformer_keys_1.keys)();
-    return typeKeys.reduce(function (result, key) {
-        return result;
-    }, {});
-}
 // Convert a JSON/Standard-like schema into EasyForm `structure`
 // Supported mappings (best-effort):
 // - string => string | email | password | color | date | time | text (via format/ui hints)
