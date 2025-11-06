@@ -36,9 +36,11 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
     for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.FormProvider = void 0;
+exports.FormProvider = exports.convertFromSchema = void 0;
 var _EasyForm = __importStar(require("./main/render"));
 var index_1 = require("./context/index");
+var generate_1 = require("./main/generate");
+Object.defineProperty(exports, "convertFromSchema", { enumerable: true, get: function () { return generate_1.convertFromSchema; } });
 exports.default = _EasyForm.default;
 exports.FormProvider = index_1.EasyFormProvider;
 __exportStar(require("./interfaces/index"), exports);
