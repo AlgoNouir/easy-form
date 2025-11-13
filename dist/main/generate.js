@@ -34,6 +34,11 @@ function mapPropertyToInput(name, prop, isRequired) {
     var label = prop.title || name;
     var description = prop.description;
     var defaultValue = prop.default;
+    var hint = prop.hint ||
+        prop["x-hint"] ||
+        prop["ui:hint"] ||
+        prop["ui:help"] ||
+        undefined;
     // Handle enum as select first
     if (Array.isArray(prop.enum)) {
         return {
@@ -42,6 +47,7 @@ function mapPropertyToInput(name, prop, isRequired) {
             description: description,
             required: !!isRequired,
             defaultValue: defaultValue,
+            hint: hint,
             options: prop.enum.map(function (v) { return ({
                 label: String(v),
                 value: String(v),
@@ -60,6 +66,7 @@ function mapPropertyToInput(name, prop, isRequired) {
                 description: description,
                 required: !!isRequired,
                 defaultValue: defaultValue,
+                hint: hint,
                 pattern: prop.pattern,
             };
         }
@@ -70,6 +77,7 @@ function mapPropertyToInput(name, prop, isRequired) {
                 description: description,
                 required: !!isRequired,
                 defaultValue: defaultValue,
+                hint: hint,
                 minLength: prop.minLength,
                 pattern: prop.pattern,
             };
@@ -81,6 +89,7 @@ function mapPropertyToInput(name, prop, isRequired) {
                 description: description,
                 required: !!isRequired,
                 defaultValue: defaultValue,
+                hint: hint,
             };
         }
         if (format === "date") {
@@ -90,6 +99,7 @@ function mapPropertyToInput(name, prop, isRequired) {
                 description: description,
                 required: !!isRequired,
                 defaultValue: defaultValue,
+                hint: hint,
             };
         }
         if (format === "time") {
@@ -99,6 +109,7 @@ function mapPropertyToInput(name, prop, isRequired) {
                 description: description,
                 required: !!isRequired,
                 defaultValue: defaultValue,
+                hint: hint,
             };
         }
         if (format === "textarea" || uiWidget === "textarea") {
@@ -108,6 +119,7 @@ function mapPropertyToInput(name, prop, isRequired) {
                 description: description,
                 required: !!isRequired,
                 defaultValue: defaultValue,
+                hint: hint,
                 maxLength: prop.maxLength,
                 minLength: prop.minLength,
             };
@@ -118,6 +130,7 @@ function mapPropertyToInput(name, prop, isRequired) {
             description: description,
             required: !!isRequired,
             defaultValue: defaultValue,
+            hint: hint,
             maxLength: prop.maxLength,
             minLength: prop.minLength,
             pattern: prop.pattern,
@@ -131,6 +144,7 @@ function mapPropertyToInput(name, prop, isRequired) {
             description: description,
             required: !!isRequired,
             defaultValue: defaultValue,
+            hint: hint,
             minValue: prop.minimum,
             maxValue: prop.maximum,
         };
@@ -143,6 +157,7 @@ function mapPropertyToInput(name, prop, isRequired) {
             description: description,
             required: !!isRequired,
             defaultValue: typeof defaultValue === "boolean" ? String(defaultValue) : defaultValue,
+            hint: hint,
             options: [
                 { label: "Yes", value: "true" },
                 { label: "No", value: "false" },
@@ -159,6 +174,7 @@ function mapPropertyToInput(name, prop, isRequired) {
                 label: label,
                 description: description,
                 required: !!isRequired,
+                hint: hint,
                 inputs: valueField ? { value: valueField } : {},
                 minLength: prop.minItems,
                 maxLength: prop.maxItems,
@@ -181,6 +197,7 @@ function mapPropertyToInput(name, prop, isRequired) {
                 label: label,
                 description: description,
                 required: !!isRequired,
+                hint: hint,
                 inputs: inputs,
                 minLength: prop.minItems,
                 maxLength: prop.maxItems,
@@ -204,6 +221,7 @@ function mapPropertyToInput(name, prop, isRequired) {
             label: label,
             description: description,
             required: !!isRequired,
+            hint: hint,
             inputs: inputs,
             minLength: 1,
             maxLength: 1,
@@ -216,6 +234,7 @@ function mapPropertyToInput(name, prop, isRequired) {
         description: description,
         required: !!isRequired,
         defaultValue: defaultValue,
+        hint: hint,
     };
 }
 //# sourceMappingURL=generate.js.map

@@ -158,6 +158,15 @@ export function RenderField({ name, field, control }: RenderFieldProps) {
           {_field?.required && (
             <span className="text-xl text-red-500 font-bold">*</span>
           )}
+          {_field?.hint && (
+            <span
+              className="text-gray-400 cursor-help select-none"
+              title={_field.hint}
+              aria-label="Hint"
+            >
+              ⓘ
+            </span>
+          )}
         </div>
       )}
       <div className="flex">

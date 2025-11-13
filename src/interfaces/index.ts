@@ -4,6 +4,7 @@ export interface MetaData {
   required?: boolean;
   description?: string;
   defaultValue?: any;
+  hint?: string;
 }
 
 export interface StringInput extends MetaData {
